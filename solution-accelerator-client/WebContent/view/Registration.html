@@ -1,0 +1,49 @@
+
+<table align="center">
+
+	<h2>Registration</h2>
+	<tr>
+		<td><label class="col-sm-2 control-label">Name</label></td>
+		<td><input class="form-control" ng-model="user.name" type="text"
+			placeholder="Enter your name"></td>
+
+
+	</tr>
+
+	<tr>
+		<td><label for="email" class="col-sm-2 control-label">Email Id</label></td>
+		<td><input class="form-control" ng-model="user.emailId"
+			type="email" placeholder="Enter your emailId."></td>
+
+
+
+	</tr>
+
+	<tr>
+		<td><label for="contact" class="col-sm-2 control-label">Contact</label></td>
+		<td><input class="form-control" ng-model="user.contactNumber"
+			type="number" placeholder="Enter your contactNumber"></td>
+
+
+	</tr>
+
+	<tr>
+		<td><label for="company" class="col-sm-2 control-label">Organisation</label></td>
+		<td><input class="form-control" ng-model="user.companyName"
+			type="text" placeholder="Enter your organisation in which you work"></td>
+
+
+	</tr>
+
+	<tr>
+		<td><label for="password" class="col-sm-2 control-label">Password</label></td>
+		<td><input class="form-control" ng-model="user.password"
+			type="text" placeholder="Enter your password"></td>
+
+
+	</tr>
+	<tr>
+		<td colspan='2' style="text-align: right;">
+		<button ng-click="newRegistration()" class="btn btn-success">Sign Up</button></td>
+	</tr>
+</table>

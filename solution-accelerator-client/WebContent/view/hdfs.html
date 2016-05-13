@@ -1,0 +1,23 @@
+
+<div class="table-responsive">
+	<h3><center>HDFS Configuration</center></h3>
+	<form ng-submit="processConfiguration()">
+		<table class="table">
+			<tr>
+				<td><label>HDFS Destination</label></td>
+				<td><input type="text" name="hdfsLocation"
+					ng-model="hdfsOutputConfig.hdfsLocation" required /></td>
+			</tr>			
+			<tr>
+				<td></td>
+				<td style="text-align: right;">
+					<!-- <input type="submit"
+					class="btn-warning" id="configProcessButton" value="Process"
+					style="border-radius: 5px"> --> <a href="#dispatchToCluster"
+					class="btn btn-success">Next</a>
+				</td>
+			</tr>
+
+		</table>
+	</form>
+</div>

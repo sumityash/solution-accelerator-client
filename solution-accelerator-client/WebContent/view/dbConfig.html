@@ -1,0 +1,61 @@
+<div class="table-responsive">
+		<table class="table">
+		<thead>
+			<tr>
+				<td><label>DatabaseType</label></td>
+				<!-- ng-init="driverType=databaseDriver[0]" -->
+				<td colspan="2">
+					<select required ng-options="value.type for value in databaseDriver" ng-model="driverType" ng-change="setDbDriver()">
+							<!-- <option ng-repeat="x in databaseDriver" value="{{x.driverClass}}">{{x.type}}</option> -->
+							<option></option>
+					</select>
+				</td>
+			</tr>
+		</thead>
+		</table>
+
+	<form ng-hide="createURLDisabled">
+		<table class="table">
+			<tr>
+				<td><label>Host IP</label></td>
+				<td><input type="text" ng-model="dbConfig.hostIp"
+					placeholder="eg:ip address Of Server*"></td>
+			</tr>
+			<tr ng-switch="dbConfig.driver">
+				<td ng-switch-when="oracle.jdbc.driver.OracleDriver"><label>Driver Type</label></td>
+				<td ng-switch-when="oracle.jdbc.driver.OracleDriver"><input type="text" ng-model="$parent.oracleDriverType" placeholder="eg:thin,thick"></td>
+			</tr>
+			<tr>
+				<td><label>Username</label></td>
+				<td><input type="text" ng-model="dbConfig.username"
+					placeholder="eg:root or username of server"></td>
+			</tr>
+			<tr>
+				<td><label>Password</label></td>
+				<td><input type="password" ng-model="dbConfig.password"
+					placeholder="eg:password of server" ></td>
+			</tr>
+			<tr>
+				<td><label>DataBase Name</label></td>
+				<td>
+					<select required ng-options="value for value in databaseList" ng-model="dbConfig.database" ng-focus="retreiveDatabase()"><option></option></select>
+				</td>
+			</tr>
+			<tr>
+				<td><label>Table Name</label></td>
+				<td>
+					<select required ng-options="value for value in tableList" ng-model="dbConfig.table"  ng-focus="retreiveTables()"><option></option></select>
+				</td>
+			</tr>
+
+			<tr>			
+				<td colspan='2' style="text-align: right;"><a href="#dispatchToSelectOutput" class="btn btn-success">Next</a></td>
+			</tr>
+			
+			
+				
+			
+
+		</table>
+	</form>
+</div>

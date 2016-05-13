@@ -1,0 +1,37 @@
+<div class="table-responsive">
+	<form ng-submit="processEmail()">
+		<table class="table">
+			<tr>
+				<td><label>HostName</label></td>
+				<td><input type="text" ng-model="emailSource.mailHost" required><br></td>
+			</tr>
+			<tr>
+				<td><label>PortNumber</label></td>
+				<td><input type="text" ng-model="emailSource.mailPort" required><br></td>
+			</tr>
+			<tr>
+				<td><label>Username</label></td>
+				<td><input type="text" ng-model="emailSource.mailUsername" required><br></td>
+			</tr>
+			<tr>
+				<td><label>Password</label></td>
+				<td><input type="text" ng-model="emailSource.mailPassword" required><br></td>
+			</tr>
+			<tr>
+				<td><label>Folder</label></td>
+				<td><input type="text" ng-model="emailSource.mailFolder" required><br></td>
+			</tr>
+			<tr>
+				<td><label>IsExchangeServer</label></td>
+				<td><input type="text" ng-model="emailSource.isExchangeServer" required><br></td>
+			</tr>
+
+			<tr>
+				<td colspan='2' style="text-align: right;"><input type="submit"
+					 class="btn-warning"
+					id="emailProcessButton" value="Process" style="border-radius: 5px"></td>
+			</tr>
+
+		</table>
+	</form>
+</div>
