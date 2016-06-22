@@ -19,6 +19,7 @@
         <artifactId>maven-war-plugin</artifactId>
         <version>2.4</version>
         <configuration>
+          <finalName>solution-accelerator-client</finalName>
           <warSourceDirectory>WebContent</warSourceDirectory>
           <failOnMissingWebXml>false</failOnMissingWebXml>
         </configuration>
