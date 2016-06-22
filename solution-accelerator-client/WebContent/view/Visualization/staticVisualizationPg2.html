@@ -1,0 +1,53 @@
+<div class="row content">
+
+	<div class="col-sm-3 sidenav" >
+		<div class="well">
+		
+			<h5><b>Dimension (X Axis) </b></h5>
+			<div  style="text-align: right"><select required  ng-options="value.column for value in xColumns track by value.column" ng-model="groupByColumn"  ng-change="setXcolumn()"></select></div>
+			<div ng-switch="groupByColumn.dataType">
+				<div ng-switch-when="date">
+					<label>BreakDown:</label> <br>
+					<input type="radio" ng-model="objToSend.subGroupStr" value="N.A" > None<br>
+		    		<input type="radio" ng-model="objToSend.subGroupStr" value="year" > Year<br>
+		  			<input type="radio" ng-model="objToSend.subGroupStr" value="month"> Month<br>
+		  			<input type="radio" ng-model="objToSend.subGroupStr" value="year,month"> Year & Month<br><br><br>
+		  		</div>	
+  			</div>
+  			
+  			<h5><b>What to measure (Y Axis)</h5>
+				<div  style="text-align: right"><select required ng-options="value.column for value in yColumns track by value.column" ng-model="aggregateColumn" ng-change="setYcolumn()" ></select></div>
+				
+				
+				<label>Aggregate By</label>  <br>
+					<input type="checkbox" ng-model="count" ng-disabled="disableAggregate">Count<br>
+					<div ng-if="(aggregateColumn.dataType=='integer')||(aggregateColumn.dataType=='double')||(aggregateColumn.dataType=='float')||(aggregateColumn.dataType=='long')"><input type="checkbox"  ng-model="$parent.sum" ng-disabled="disableAggregate" >Sum<br></div>
+					<div ng-if="(aggregateColumn.dataType=='integer')  ||(aggregateColumn.dataType=='double')||(aggregateColumn.dataType=='float')||(aggregateColumn.dataType=='long')" > <input type="checkbox" ng-model="$parent.max"  ng-disabled="disableAggregate">Max<br></div>
+					<div ng-if="(aggregateColumn.dataType=='integer')  ||(aggregateColumn.dataType=='double')||(aggregateColumn.dataType=='float')||(aggregateColumn.dataType=='long')" > <input type="checkbox" ng-model="$parent.min" ng-disabled="disableAggregate" >Min <br></div>
+					<div ng-if="(aggregateColumn.dataType=='integer') ||(aggregateColumn.dataType=='double')||(aggregateColumn.dataType=='float')||(aggregateColumn.dataType=='long')" > <input type="checkbox" ng-model="$parent.avg" ng-disabled="disableAggregate" >Avg <br><br> </div>
+				<input type="submit" value="Visualize" class="btn btn-warning btn-md"  ng-click="getGraph()">
+			
+		</div>
+	</div>
+	<div class="col-sm-9 text-left">
+		
+		 <div>
+				<div><br><br>
+				<center><font style="color:red;">{{error}}</font></center>
+				<div ng-if="showChart">
+					<li class="dropdown"><a class="dropdown-toggle">
+							{{chart.typeName}} </a>
+						<ul class="dropdown-menu">
+							<li ng-repeat="type in chartTypes"><a
+								ng-click="selectType(type)">{{type.typeName}}</a></li>
+						</ul></li>
+					<div g-chart></div>
+				</div>
+				</div>
+	</div>
+		
+	</div>
+</div>
+
+		
+	

@@ -10,14 +10,54 @@
 <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
 <script src="js/angular.min.js"></script>
 <script src="js/angular-route.min.js"></script>
-<script src="js/App.js"></script>
+<script src="js/appjs/app.js"></script>
+<script src="js/appjs/fetchConfigurationsFactory.js"></script>
+<script src="js/appjs/appRun.js"></script>
+
+
+<!------------------------------------------------Controllers------------------------------------------------- -->
+
+<script src="js/controllers/browseHDFSController.js"></script>
+<script src="js/controllers/cleanDataController.js"></script>
+<script src="js/controllers/dbConfigController.js"></script>
+<script src="js/controllers/hdfsLocationController.js"></script>
+<script src="js/controllers/homeController.js"></script>
+<script src="js/controllers/loginPageController.js"></script>
+<script src="js/controllers/s3LocationController.js"></script>
+<script src="js/controllers/twitterController.js"></script>
+<script src="js/controllers/sparkUIController.js"></script>
+<script src="js/controllers/sparkResMngController.js"></script>
+<script src="js/controllers/staticVisualizationControllerPg1.js"></script>
+<script src="js/controllers/streamingVisualizationController.js"></script>
+<script src="js/controllers/logController.js"></script>
+<script src="js/controllers/contextController.js"></script>
+<script src="js/controllers/cepController.js"></script>
+<script src="js/controllers/ingestionController.js"></script>
+
+<!-------------------------------------------------visualization graphs--------------------------------------------------------------- -->
+<script src="js/visualizationGraph/jsapi"></script>
+<script src="js/visualizationGraph/ui-bootstrap-tpls-0.10.0.js"></script>
+<script src="js/visualizationGraph/services.js"></script>
+<script src="js/visualizationGraph/controllers.js"></script>
+<script src="js/visualizationGraph/filters.js"></script>
+<script src="js/visualizationGraph/directives.js"></script>
+
+
+<!-- <script src="visualization/js/visualizationApp.js"></script> -->
 <title>Solution Accelerator</title>
 <style type="text/css">
-  body {
+
+   /* body {
 	background-image: url("images/Bigdata1.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
-} 
+}  */  
+
+body {
+    padding-top: 51px;
+    padding-bottom:0px;
+  }
+
 /* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
 	margin-bottom: 0;
@@ -44,6 +84,7 @@ footer {
 	position: fixed;
 	width: 100%;
 	bottom: 0;
+	z-index:99999;
 }
 
 /* On small screens, set height to 'auto' for sidenav and grid */
@@ -56,66 +97,117 @@ footer {
 		height: auto;
 	}
 }
+
+
+.modal {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) { 
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+.modal-processing{
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+}
+.newform-group{
+   .form-group;
+   height:550px;
+ }
+textarea{
+   height:100%;
+}
+
+ .bottombar{
+	bottom: 0;
+	z-index:999999;
+	min-height: 1%;
+}
+.bottom-navbar-right {
+    float: right!important;
+    margin-right: -15px;
+}
+
+.bottom-navbar-nav {
+    float: left;
+    margin: 0;
+}
+.bottom-nav {
+    padding-left: 0;
+    list-style: none;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
 </style>
 </head>
 <body>
-	<!-- Header section -->
-	<nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#myNavbar">
-				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-		</div>
-		<div class="collapse navbar-collapse" id="myNavbar">
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="#home">Home</a></li>
-				<li><a href="#">About</a></li>
-				<li><a href="#sparkUI">Spark</a></li>
-				<li><a href="#browseHDFS">Browse HDFS</a></li>
-			</ul>
-			 <ul class="nav navbar-nav navbar-right">
-			 	<li><a data-toggle="modal" href="#settingModal" ng-hide="userOptions">Settings</a></li>
-				<li><a data-toggle="modal" href="#loginModal" ng-hide="userOptions">Login</a></li>
-				<li><a href="#dispatchToRegistrationPage" ng-hide="userOptions">Sign Up</a></li>
-				<li><a href="" ng-click="logOutUser()" ng-hide="!userOptions">Logout</a></li>
-			</ul>
-			
-			
-		</div>
-	</div>
-	<div class="modal fade" id="loginModal" role="dialog">
+<!-- <div class="header header-color" >
+    <h2 class="h2-tag">Solution Accelerator</h2>      
+  </div> -->
+
+<!-- <!------------------------------------Login Modal On Same Page--------------------------------- -->
+<!-- <body>
+<div class="wrapper" >
+    <form class="form-signin" id="wrap-color">       
+      <h2 class="form-signin-heading">Login</h2>
+      <input type="text" class="form-control" name="username" placeholder="Email Address" required="" autofocus="" />
+	  <br>
+      <input type="password" class="form-control" name="password" placeholder="Password" required=""/>      
+      <br>
+       <label><input type="checkbox"> Remember me</label>
+      <br>
+      <button class="btn btn-lg btn-primary btn-block"  type="submit">Login</button>   
+    </form>
+  </div>
+  </body> -->
+<!--------------------------------------- Login Modal------------------------------------------ -->	
+<div class="modal fade" id="loginModal" role="dialog">
 						<div class="modal-dialog">
 							<!-- Modal content-->
-							<form>
+							<form ng-submit="validate()">
 							<div class="modal-content">
-								<div class="modal-body">
-								<center><label>Sign In </label></center>
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<center><h4 class="modal-title">Sign In </h4></center>
+					</div>
+					<div class="modal-body">
+								<center><font color="red">{{loginError}}</font></center>
 									<table class="table">
 										<tr>
 											<td><label>Registered EmailID</label></td>
 											<td><input type="text" ng-model="user.emailId"
-												placeholder="eg:xyz@abc.com"></td>
+												placeholder="eg:xyz@abc.com" required></td>
 										</tr>
 										<tr>
 											<td><label>Password</label></td>
-											<td><input type="password" ng-model="user.password"></td>
+											<td><input type="password" ng-model="user.password" required></td>
 										</tr>
-
 									</table>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default"
-										data-dismiss="modal" ng-click="validate()">Login</button>
+									<input type="submit" class="btn btn-default" value="Login">
 								</div>
 							</div>
 							</form>
 						</div>
 					</div>
-					
-							<div class="modal fade" id="settingModal" role="dialog">
+	<!--------------------------------------- Setting Modal------------------------------------------ -->	
+									<div class="modal fade" id="settingModal" role="dialog">
 						<div class="modal-dialog">
 							<!-- Modal content-->
 							<div class="modal-content">
@@ -136,38 +228,61 @@ footer {
 								</div>
 							</div>
 						</div>
-					</div>
-
-	</nav>
-	<div class="container-fluid text-center">
-		<div class="row content">
-		
-		<div class="col-sm-2 sidenav">
-				<!-- <p>
-					<a href="#dispatchToConfiguration" id="configurationLink">AWS
-						Configuration</a>
-				</p> -->
-			</div>
-			
-  <!-- Modal -->
+					</div>			
+					
+     <!------------------------------------------ Processing Modal ----------------------------------->
   <div class="modal fade" data-backdrop="static" id="myModal" role="dialog">
-    <div class="modal-dialog">
     
       <!-- Modal content-->
-      <div class="modal-content">
-       <h3>Processing Please Wait...</h3>
+      <div class="modal-processing">
+       <h3><font style="color: white;">{{processingStatus}}</font></h3>
        <img src="images/processing.gif">
       </div>
-
       
     </div>
-  </div>
-			
-			<div class="col-sm-8 text-left" style="margin-top: 7%" ng-view="">
-			</div>
+  
+	<!------------------------------------- Header section ------------------------------------------------->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container-fluid" >
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			<span class="icon-bar"></span> <span class="icon-bar"></span> 
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#dispatchToHome">Home</a></li>
+				<li><a href="#sparkUI" ng-hide="hideButons">Spark Job Server</a></li>
+				<li><a href="#sparkResMng" ng-hide="hideButons">Spark Resource Manager</a></li>
+				<li><a href="#browseHDFS" ng-hide="hideButons">Browse HDFS</a></li>
+				<li><a href="#dispatchToIngestion" ng-hide="hideNavBarBtn">Data Ingestion</a></li>
+				<li><a href="#CleanDataHome" ng-hide="hideNavBarBtn">Data Cleaning</a></li>
+				<!-- <li><a href="#dispatchToStaticVisualizationPg1" ng-hide="hideNavBarBtn">Visualization</a></li> -->
+				<li><a href="#visualizationOptions" ng-hide="hideNavBarBtn">Visualization</a></li>
+				<!-- <li><a href="#logs" ng-hide="hideButons">Spark Logs</a></li> -->
+			</ul>
+			 <ul class="nav navbar-nav navbar-right">
+			 	<li><a data-toggle="modal" href="#settingModal" ng-hide="userOptions">Settings</a></li>
+				<!-- <li><a data-toggle="modal" href="#loginModal" ng-hide="userOptions">Login</a></li> -->
+				<li><a href="#dispatchToRegistrationPage" ng-hide="userOptions">Sign Up</a></li>
+				<li><a href="" ng-click="logOutUser()" ng-hide="!userOptions">Logout</a></li>
+			</ul>
 		</div>
 	</div>
-	<footer class="container-fluid text-center"> Innovation Group
+	</nav>
+	
+	<!--------------------------------------------------Content---------------------------------------------------------------->
+<!-- <div class="container-fluid">
+	<div > -->
+		<!-- <div class="col-sm-1 sidenav"><p><a href="#dispatchToConfiguration" id="configurationLink">AWS Configuration</a></p></div> -->
+		<div class="container-fluid"  ng-view=""></div>
+		<!-- <div class="col-sm-1 sidenav"><div class="well"><p>ADS</p></div><div class="well"><p>ADS</p></div></div> -->
+<!-- 	</div>
+</div> -->
+	
+	<!--------------------------------------------------Footer--------------------------------------------------------------->
+	 <footer class="container-fluid text-center" ng-hide="hideFooter"> Developed By : Innovation Group , Yash Technologies Pvt Ltd 
 	</footer>
 </body>
 </html>

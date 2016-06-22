@@ -1,0 +1,52 @@
+
+<center>
+
+ 		<h1><span class="label label-default">Type Of Source To Ingest </span></h1>
+ 		<br><br>
+			<button type="button" class="btn btn-warning" ng-click="sourceType('static')">Static</button>
+			<button type="button" class="btn btn-danger" ng-click="sourceType('streaming')">Streaming</button>
+		
+</center>
+
+
+
+<center>
+
+ 		<br><br><br><br>
+		<a href="#dispatchToDatabase" class="btn btn-primary" ng-hide="staticSource" >Database</a>
+		<!-- <a href="#dispatchToEmail" class="btn btn-success" ng-hide="staticSource">Email</a> -->
+		<a href="#dispatchToTwitter" class="btn btn-info" ng-hide="streamSource" >Twitter</a>
+		<a href="#dispatchToCEP" class="btn btn-success" ng-hide="streamSource">Complex Event Processing</a>
+		
+
+</center>
+
+
+ 	<!--------------------------------------- Ingestion Modal------------------------------------------ -->
+<!--<div class="modal fade" id="ingestionModal" role="dialog">
+	<div class="modal-dialog">
+		Modal content
+		<div class="modal-content">
+			<h3>Context Details...</h3>
+			<div class="modal-body">
+
+				<div class="alert alert-danger" ng-hide="hideError">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>{{contextExistError}}</strong>
+				</div>
+				
+				<table class="table">
+					<tr>
+						<td><label>Provide name for your Context:</label></td>
+						<td><input type="text" ng-model="streamingContextName"
+							placeholder="eg: streamingContext"></td>
+					</tr>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default"
+					ng-click="checkContextName()">Ok</button>
+			</div>
+		</div>
+	</div>
+</div> -->

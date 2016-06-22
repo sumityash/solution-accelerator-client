@@ -1,0 +1,22 @@
+<center><font color="red">{{error}}</font><br>
+
+<!-- To Validate the cluster Ip first after that it will go to other options -->
+<div ng-hide="!hideButons">
+	<form ng-submit="validateClusterIP()" class="form-inline">
+		<div class="form-group">
+			<label> Spark cluster IP:</label>
+				<input	type="text" class="form-control" id="emr_url"  ng-model="clusterConfig.masterNodeUrl" placeholder="provide ip eg: ec2-54-224-60-20.compute-1.amazonaws.com"	required>
+				&nbsp;&nbsp;&nbsp;<input type="submit" class="btn btn-warning" value="Check" id="getEmrUrl"/>
+		</div>
+	</form>
+</div>
+
+	<div ng-hide="hideButons">
+	<h1><span class="label label-default">Select the operation you want to perform? </span></h1><br>
+		<a href="#dispatchToIngestion" class="btn btn-success" ng-click="fetchAllConfigurations()">Data Ingestion</a>
+		<a href="#CleanDataHome" class="btn btn-info">Data Cleaning</a>
+		<!-- <a href="#dispatchToStaticVisualizationPg1" class="btn btn-danger">Visualization</a> -->
+		<a href="#visualizationOptions" class="btn btn-danger">Visualization</a>
+		<a href="#" class="btn btn-warning">Analysis</a>
+	</div>
+</center>

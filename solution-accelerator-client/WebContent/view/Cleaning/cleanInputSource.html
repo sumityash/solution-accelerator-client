@@ -1,0 +1,96 @@
+ <div ng-hide="!showCleanedMessage">
+	 <center>
+	
+	 		<h1><span class="label label-default">Where the  file is kept?</span></h1>
+	 		<br>
+			<button type="button" class="btn btn-success" ng-click="cleanInputSourceLocation('s3')">S3</button>
+			<button type="button" class="btn btn-info" ng-click="cleanInputSourceLocation('hdfs')">HDFS</button>
+			
+	</center>
+	<br><br><br>
+	
+	
+	<div class="table-responsive" style="border:0;">
+		<form  ng-submit="cleanData('s3')" ng-hide="showS3Form">
+			<table class="table table-striped">
+				<tr>
+					<td><label>Input File Location</label></td>
+					<td><input type="text" name="s3FileLocation"
+						ng-model="s3OutputConfig.s3Location" required /></td>
+				</tr>
+				<tr>
+					<td><label>AWS Access Key</label></td>
+					<td><input type="password" ng-model="s3OutputConfig.awsAccessKey"
+						required /></td>
+				</tr>
+				<tr>
+					<td><label>AWS Secret Key</label></td>
+					<td><input type="password" ng-model="s3OutputConfig.awsSecretKey"
+						required /></td>
+				</tr>
+				
+				<tr>
+					<td><label>Location to keep cleaned data?</label></td>
+					<td><input type="text" ng-model="s3InputConfig.outputLocationToSave"
+						required /></td>
+				</tr>
+				<tr>
+					<td><label>Clean Data on the basis of ?</label></td>
+					<td>
+						<label><input type="checkbox" value="null" ng-model="s3InputConfig.nullCheck"  >Null Values </label>
+						<label ><input type="checkbox" value="empty" ng-model="s3InputConfig.emptyCheck" >Empty String</label>
+					</td>
+				</tr>
+					
+				<tr>
+					<td></td>
+					<td style="text-align: right;">
+						<!-- <input type="submit" class="btn-warning" id="configProcessButton" value="Process" style="border-radius: 5px"> --> 
+						<!-- <a href="#dispatchToCluster" class="btn btn-success">Next</a> -->
+						<input type="submit" class="btn-primary" value="Clean">
+					</td>
+				</tr>
+	
+			</table>
+		</form>
+	
+	
+		<form  ng-submit="cleanData('hdfs')" ng-hide="showHDFSForm">
+			<table class="table table-striped">
+				<tr>
+					<td><label>File Location</label></td>
+					<td><input type="text" name="hdfsFileLocation"
+						ng-model="hdfsOutputConfig.hdfsLocation" required  placeholder="/user/hadoop"/></td>
+				</tr>
+				
+				<tr>
+					<td><label>Location to keep cleaned data?</label></td>
+					<td><input type="text" ng-model="hdfsInputConfig.outputLocationToSave"
+						required /></td>
+				</tr>			
+				<tr>
+					<td><label>Clean Data on the basis of ?</label></td>
+					<td>
+						<label><input type="checkbox"  ng-model="hdfsInputConfig.nullCheck"   >Null Values </label>
+						<label ><input type="checkbox"  ng-model="hdfsInputConfig.emptyCheck"  >Empty String</label>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td style="text-align: right;">
+						<!-- <input type="submit" class="btn-warning" id="configProcessButton" value="Process" style="border-radius: 5px"> --> 
+						<!-- <a href="#dispatchToCluster" class="btn btn-success">Next</a> -->
+						<input type="submit" class="btn-primary" value="Clean">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>
+<center>
+		<label ng-model="cleanedMessage" ng-hide="showCleanedMessage" ng-if="setColor" style="color:green;">{{cleanedMessage}}</label><br>
+		<a href="#visualizationOptions" ng-hide="showCleanedMessage" class="btn btn-danger">Visualize Your Data</a>
+		<label ng-model="cleanErrorMessage" ng-hide="showCleanErrorMessage" style="color:red;" >{{cleanErrorMessage}}</label>
+
+</center>

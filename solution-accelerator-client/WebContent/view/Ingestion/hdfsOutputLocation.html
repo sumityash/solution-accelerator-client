@@ -1,0 +1,133 @@
+<div class="well-lg" ng-hide="showResult">
+	<center><h1><span class="label label-default">Sample Data</span></h1></center><br>
+	<table class="table table-striped" id="resultTable" style="box-shadow: 0 0 18px black;">
+	</table><br>
+	<center>
+		<a href="#CleanDataHome" class="btn btn-info">Clean Your Data</a>
+		<a href="#visualizationOptions" class="btn btn-danger">Visualize Your Data</a>
+	</center>
+</div>
+
+
+<div class="table-responsive" ng-hide="!showResult">
+	<h3><center>HDFS Configuration</center></h3>
+	<form ng-submit="processConfiguration()">
+		<table class="table table-striped">
+			<tr>
+				<td><label>HDFS Destination</label></td>
+				<td><input type="text" name="hdfsLocation"
+					ng-model="hdfsOutputConfig.hdfsLocation" required placeholder="/user/hadoop/folder name/"/></td>
+			</tr>
+			<tr>
+				<td><input type="button" class="btn-primary"
+			data-toggle="modal" data-target="#dbModal"
+			value="Preview Configuration" style="border-radius: 5px"></td>
+				<td style="text-align: right;">
+					<input type="submit" class="btn-warning" value="Process"/>
+				</td>
+			</tr>
+
+		</table>
+	</form>
+</div>
+
+
+
+<div class="well-lg" ng-hide="showError"><br><br>
+<center>
+	<table class="table table-striped">
+		<tr>
+			<td><label>Response:</label></td>
+			<td><textarea rows="5" cols="70" id="showError"></textarea></td>
+		</tr>
+	</table>
+</center>
+</div>
+
+
+
+ <!-- Modal -->
+			<div class="modal fade" id="dbModal" role="dialog">
+				<div class="modal-dialog">
+					Modal content				<div class="modal-content">
+						<div class="modal-body">
+							<table class="table table-striped">
+								<label>Database Configurations</label>
+
+								<tr>
+									<td>Database Type</td>
+									<td><input type="text" ng-model="$parent.dbConfig.driver"></td>
+								</tr>
+
+								<tr>
+									<td>Host Ip</td>
+									<td><input type="text" ng-model="$parent.dbConfig.hostIp"
+										placeholder="eg:8080 etc."></td>
+								</tr>
+
+								<tr>
+									<td>Username</td>
+									<td><input type="text" ng-model="$parent.dbConfig.username"
+										placeholder="eg:root or username of server"></td>
+								</tr>
+
+							</table>
+
+							<table class="table table-striped">
+
+								<tr ng-switch="$parent.outputLocation">
+
+									<label ng-if="$parent.outputLocation=='s3'">S3 Location</label>
+									<label ng-if="$parent.outputLocation=='hdfs'">Hdfs
+										Location</label>
+
+									<td ng-switch-when="s3">AWS S3 Location</td>
+									<td ng-switch-when="s3"><input type="text"
+										name="s3Location" ng-model="$parent.s3OutputConfig.s3Location" /></td>
+
+									<td ng-switch-when="hdfs">HDFS Location</td>
+									<td ng-switch-when="hdfs"><input type="text"
+										name="s3Location" ng-model="$parent.hdfsOutputConfig.hdfsLocation" /></td>
+								</tr>
+
+								<tr ng-switch="$parent.outputLocation">
+									<td ng-switch-when="s3">AWS Access Key</td>
+									<td ng-switch-when="s3"><input type="text"
+										ng-model="$parent.s3OutputConfig.awsAccessKey"  /></td>
+								</tr>
+								<tr ng-switch="$parent.outputLocation">
+									<td ng-switch-when="s3">AWS Secret Key</td>
+									<td ng-switch-when="s3"><input type="text"
+										ng-model="$parent.s3OutputConfig.awsSecretKey"  /></td>
+								</tr>
+								<tr ng-switch="$parent.outputLocation">
+									<td ng-switch-when="s3">Partition Column</td>
+									<td ng-switch-when="s3"><input type="text"
+										ng-model="$parent.s3OutputConfig.partitionColumn"  /></td>
+								</tr>
+							</table>
+
+							<table class="table table-striped"> 
+								<label>Cluster Configurations</label>
+
+								<tr>
+									<td>Cluster MASTER NODE</td>
+									<td><input type="text"
+										ng-model="$parent.clusterConfig.masterNodeUrl"></td>
+								</tr>
+								<tr>
+									<td>Configuration Alias Name</td>
+									<td><input type="text"
+										ng-model="$parent.aliasName" ><br></td>
+								</tr>
+							</table>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" ng-click="savePreviewedConfiguration()">Save
+								Configuration</button>
+						</div>
+					</div>
+				</div>
+			</div>

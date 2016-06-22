@@ -1,0 +1,107 @@
+<div class="table-responsive"><br><br>
+	<form ng-submit="processTwitter()">
+		<table class="table table-striped">
+			<tr>
+				<td><label align="left">Consumer Key</label></td>
+				<td><input type="password" ng-model="twitterConfig.consumerKey" required><br></td>
+			</tr>
+			<tr>
+				<td><label align="left">ConsumerSecret Key</label></td>
+				<td><input type="password" ng-model="twitterConfig.consumerSecret" required><br></td>
+			</tr>
+			<tr>
+				<td><label align="left">Access Token</label></td>
+				<td><input type="password" ng-model="twitterConfig.accessToken"><br></td>
+			</tr>
+			<tr>
+				<td><label align="left">AccessToken Secret</label></td>
+				<td><input type="password"
+					ng-model="twitterConfig.accessTokenSecret" required><br></td>
+			</tr>
+
+			<tr>
+				<td><label align="left">BatchingInterval</label></td>
+				<td><input type="number"
+					ng-model="twitterConfig.batchingInterval" required><br></td>
+			</tr>
+
+			<tr>
+				<td><label align="left">Keywords</label></td>
+				<td><textarea rows="2" cols="50" id="twitterKeywords" ng-model="keyowrds" required></textarea ><br></td>
+			</tr>
+			
+			<tr>
+				<td><input type="button" class="btn-primary"
+						data-toggle="modal" data-target="#dbModal"
+						value="Preview Configuration" style="border-radius: 5px">
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan='2' style="text-align: right;">
+				<input type="submit" class="btn-warning" id="twitterProcessButton" value="Process" style="border-radius: 5px"></td>
+			</tr>
+
+		</table>
+	</form>
+</div>
+
+<!-- Modal -->
+			<div class="modal fade" id="dbModal" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-body">
+							<table class="table table-striped">
+								<label>Twitter Configurations</label>
+
+								<tr>
+									<td>Consumer Key</td>
+									<td><input type="text" ng-model="$parent.twitterConfig.consumerKey"></td>
+								</tr>
+
+								<tr>
+									<td>Consumer Secret Key</td>
+									<td><input type="text" ng-model="$parent.twitterConfig.consumerSecret"></td>
+								</tr>
+
+								<tr>
+									<td>Access Token</td>
+									<td><input type="text" ng-model="$parent.twitterConfig.accessToken"></td>
+								</tr>
+								<tr>
+									<td>Access Token Secret</td>
+									<td><input type="text" ng-model="$parent.twitterConfig.accessTokenSecret"></td>
+								</tr>
+								
+
+							</table>
+
+							<table class="table table-striped"> 
+								<label>Cluster Configurations</label>
+
+								<tr>
+									<td>Cluster MASTER NODE</td>
+									<td><input type="text"
+										ng-model="$parent.clusterConfig.masterNodeUrl"></td>
+								</tr>
+								<tr>
+									<td>Configuration Alias Name</td>
+									<td><input type="text"
+										ng-model="$parent.aliasName" ><br></td>
+								</tr>
+							</table>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" ng-click="savePreviewedConfiguration()">Save
+								Configuration</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+

@@ -1,49 +1,50 @@
 
-<table align="center">
-
-	<h2>Registration</h2>
-	<tr>
-		<td><label class="col-sm-2 control-label">Name</label></td>
-		<td><input class="form-control" ng-model="user.name" type="text"
-			placeholder="Enter your name"></td>
-
-
-	</tr>
-
-	<tr>
-		<td><label for="email" class="col-sm-2 control-label">Email Id</label></td>
-		<td><input class="form-control" ng-model="user.emailId"
-			type="email" placeholder="Enter your emailId."></td>
-
-
-
-	</tr>
-
-	<tr>
-		<td><label for="contact" class="col-sm-2 control-label">Contact</label></td>
-		<td><input class="form-control" ng-model="user.contactNumber"
-			type="number" placeholder="Enter your contactNumber"></td>
-
-
-	</tr>
-
-	<tr>
-		<td><label for="company" class="col-sm-2 control-label">Organisation</label></td>
-		<td><input class="form-control" ng-model="user.companyName"
-			type="text" placeholder="Enter your organisation in which you work"></td>
-
-
-	</tr>
-
-	<tr>
-		<td><label for="password" class="col-sm-2 control-label">Password</label></td>
-		<td><input class="form-control" ng-model="user.password"
-			type="text" placeholder="Enter your password"></td>
-
-
-	</tr>
-	<tr>
-		<td colspan='2' style="text-align: right;">
-		<button ng-click="newRegistration()" class="btn btn-success">Sign Up</button></td>
-	</tr>
-</table>
+<div class="container">
+<center><font style="color:red;">{{registrationStatus}}</font></center>
+    <div class="row">
+        <form role="form" ng-submit="newRegistration()">
+            <div class="col-lg-6">
+                <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Required Field</strong></div>
+                <div class="form-group">
+                    <label for="InputName">Enter Name</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="InputName" id="InputName" placeholder="Enter Name" ng-model="userToRegister.name" required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="InputEmail">Enter Email</label>
+                    <div class="input-group">
+                        <input type="email" class="form-control" id="InputEmailFirst" name="InputEmail" placeholder="Enter Email" ng-model="userToRegister.emailId" required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="InputEmail">Contact Number</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" id="InputContact" name="InputContact" placeholder="Contact Number" ng-model="userToRegister.contactNumber" required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="InputEmail">Organisation</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="InputOrganisation" name="InputOrganisation" placeholder="Organisation " ng-model="userToRegister.companyName" required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="InputEmail">Password</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="InputPassword" name="InputPassword" placeholder="Password " ng-model="userToRegister.password" required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                
+                <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info pull-right">
+            </div>
+        </form>
+    </div>
+</div>

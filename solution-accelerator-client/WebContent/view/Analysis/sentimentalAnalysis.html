@@ -1,0 +1,21 @@
+<div class="table-responsive">
+	<h3><center>Sentimental Analysis</center></h3>
+	<form ng-submit="processConfiguration()">
+		<table class="table table-striped">
+			<tr>
+				<td><label>Keywords</label></td>
+				<td><input type="text" name="hdfsLocation"
+					ng-model="hdfsOutputConfig.hdfsLocation" required placeholder="/user/hadoop/folder name/"/></td>
+			</tr>
+			<tr>
+				<td><input type="button" class="btn-primary"
+			data-toggle="modal" data-target="#dbModal"
+			value="Preview Configuration" style="border-radius: 5px"></td>
+				<td style="text-align: right;">
+					<input type="submit" class="btn-warning" value="Process"/>
+				</td>
+			</tr>
+
+		</table>
+	</form>
+</div>

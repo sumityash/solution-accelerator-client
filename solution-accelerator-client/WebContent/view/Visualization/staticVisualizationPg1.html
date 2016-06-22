@@ -1,0 +1,51 @@
+		 <center>
+	 		<h4><span class="label label-default">Clean data Location</span></h4>
+	 		<br>
+			<button type="button" class="btn btn-success" ng-click="visualizeInputSourceLocation('s3')">S3</button>
+			<button type="button" class="btn btn-info" ng-click="visualizeInputSourceLocation('hdfs')">HDFS</button>
+		</center>
+	
+		<div class="table-responsive" style="border:0;">
+		<form  ng-submit="setDestination('s3')" ng-hide="hideS3Form">
+			<table class="table table-striped">
+				<tr>
+					<td><label>File Location</label></td>
+					<td><input type="text" name="s3FileLocation"
+						ng-model="s3InputConfig.outputLocationToSave" required /></td>
+				</tr>
+				<tr>
+					<td><label>AWS Access Key</label></td>
+					<td><input type="password" ng-model="s3OutputConfig.awsAccessKey"
+						required /></td>
+				</tr>
+				<tr>
+					<td><label>AWS Secret Key</label></td>
+					<td><input type="password" ng-model="s3OutputConfig.awsSecretKey"
+						required /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td style="text-align: right;">
+						<input type="submit" class="btn-primary" value="ok">
+					</td>
+				</tr>
+			</table>
+		</form>
+	
+	
+		<form  ng-submit="setDestination('hdfs')" ng-hide="hideHDFSForm">
+			<table class="table table-striped">
+				<tr>
+					<td><label>File Location</label></td>
+					<td><input type="text" name="hdfsFileLocation"
+						ng-model="hdfsInputConfig.outputLocationToSave" required  placeholder="/user/hadoop"/></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td style="text-align: right;">
+						<input type="submit" class="btn-primary" value="ok">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
