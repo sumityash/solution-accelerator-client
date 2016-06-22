@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.yash</groupId>
   <artifactId>solution-accelerator-client</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1</version>
   <packaging>war</packaging>
   <name>SolutionAccelerator-Client</name>
   <build>
