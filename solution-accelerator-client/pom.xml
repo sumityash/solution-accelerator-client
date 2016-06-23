@@ -6,6 +6,7 @@
   <packaging>war</packaging>
   <name>SolutionAccelerator-Client</name>
   <build>
+    <finalName>solution-accelerator-client</finalName>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>
